@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Librería Mar de Libros — Libros nuevos y usados en Valparaíso</title>
+<meta name="description" content="Librería Mar de Libros, Esmeralda 1124, Valparaíso. Libros nuevos y usados, clásicos de tapa dura y pedidos por encargo. Con gatos de librería incluidos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#EFE8D8;
+    --tinta:#2B2620;
+    --botella:#1F4E3D;
+    --granate:#8E2F2B;
+    --mostaza:#B98A2E;
+    --linea:rgba(43,38,32,.2);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--papel);color:var(--tinta);line-height:1.7;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--mostaza);color:var(--tinta)}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  .display{font-family:'Literata',serif;font-weight:700;line-height:1.12}
+  .eyebrow{font-family:'Inconsolata',monospace;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--granate)}
+
+  /* lomos de libros — motivo firma */
+  .lomos{display:flex;height:16px}
+  .lomos span{flex:1}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(239,232,216,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:980px;margin:0 auto}
+  .brand{font-family:'Literata',serif;font-weight:700;font-size:1.2rem;color:var(--tinta);text-decoration:none}
+  .brand em{font-style:italic;color:var(--botella)}
+  .nav-links{display:flex;gap:24px;align-items:center}
+  .nav-links a{font-size:.86rem;font-weight:600;color:var(--tinta);text-decoration:none;opacity:.75;transition:opacity .2s}
+  .nav-links a:hover,.nav-links a:focus-visible{opacity:1}
+  .nav-links a:focus-visible{outline:2px solid var(--granate);outline-offset:3px}
+  .btn{display:inline-block;background:var(--botella);color:var(--papel);font-weight:600;font-size:.9rem;text-decoration:none;padding:11px 24px;transition:background .2s}
+  .btn:hover,.btn:focus-visible{background:var(--granate)}
+  .btn:focus-visible{outline:2px solid var(--tinta);outline-offset:3px}
+  .btn-linea{background:transparent;color:var(--tinta);border:1.5px solid var(--tinta)}
+  .btn-linea:hover{background:var(--tinta);color:var(--papel)}
+  @media(max-width:640px){.nav-links a:not(.btn){display:none}}
+
+  header.hero{padding:78px 0 60px;border-bottom:3px double var(--tinta)}
+  .hero-top{text-align:center;max-width:640px;margin:0 auto}
+  .hero h1{font-size:clamp(2.6rem,7.5vw,4.6rem)}
+  .hero h1 em{font-style:italic;color:var(--botella)}
+  .hero-sub{margin:20px auto 0;font-size:1.1rem}
+  .hero-cta{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .colofon{margin-top:44px;display:flex;justify-content:center;gap:36px;flex-wrap:wrap;font-family:'Inconsolata',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(43,38,32,.7)}
+  .colofon b{color:var(--granate);font-size:1rem}
+
+  section{padding:70px 0}
+  .sec-head{margin-bottom:38px}
+  .sec-head h2{font-size:clamp(1.9rem,4.5vw,2.8rem);margin-top:6px}
+
+  /* catálogo en dos columnas editoriales */
+  .catalogo{columns:2;column-gap:44px;column-rule:1px solid var(--linea)}
+  .cat-item{break-inside:avoid;padding:0 0 26px;margin-bottom:26px;border-bottom:1px solid var(--linea)}
+  .cat-item h3{font-family:'Literata',serif;font-weight:600;font-size:1.2rem;color:var(--botella);margin-bottom:6px}
+  .cat-item p{font-size:.95rem}
+  @media(max-width:760px){.catalogo{columns:1}}
+
+  .gato{background:var(--botella);color:var(--papel);padding:64px 0;text-align:center}
+  .gato .eyebrow{color:var(--mostaza)}
+  .gato h2{font-size:clamp(1.8rem,4.5vw,2.6rem);margin:8px auto 14px;max-width:22ch}
+  .gato p{max-width:52ch;margin:0 auto;opacity:.92}
+
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .rev{border:1px solid var(--linea);padding:26px;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.35)}
+  .rev .stars{color:var(--mostaza);letter-spacing:.12em}
+  .rev p{font-size:.95rem;font-family:'Literata',serif;font-style:italic}
+  .rev cite{font-family:'Inconsolata',monospace;font-style:normal;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(43,38,32,.55);margin-top:auto}
+  @media(max-width:820px){.rev-grid{grid-template-columns:1fr}}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+  .horario{border-top:2px solid var(--tinta)}
+  .horario li{list-style:none;display:flex;justify-content:space-between;padding:11px 4px;border-bottom:1px solid var(--linea);font-size:.94rem}
+  .horario .dia{font-weight:600}
+  .horario .hoy{background:rgba(185,138,46,.18)}
+  .horario time{font-family:'Inconsolata',monospace}
+  .cerrado{color:var(--granate);font-weight:600}
+  .dir .addr{font-family:'Literata',serif;font-weight:700;font-size:1.45rem;line-height:1.35;margin-bottom:12px}
+  .dir p{margin-bottom:12px;font-size:.95rem}
+  .dir a{color:var(--granate);font-weight:600}
+  @media(max-width:820px){.info-grid{grid-template-columns:1fr}}
+
+  .final{border-top:3px double var(--tinta);text-align:center;padding:76px 0}
+  .final h2{font-size:clamp(2rem,5.5vw,3.2rem);max-width:20ch;margin:8px auto 14px}
+  .final p{max-width:48ch;margin:0 auto 28px}
+
+  footer{padding:30px 0;font-size:.8rem;color:rgba(43,38,32,.6)}
+  .foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer a{color:inherit}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.on{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* galería del local */
+  .fotos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .foto-slot{aspect-ratio:4/3;border:1px dashed rgba(128,128,128,.45);border-radius:8px;display:flex;align-items:flex-end;padding:14px;background:rgba(128,128,128,.08);overflow:hidden;position:relative;margin:0}
+  .foto-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .foto-slot figcaption{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;opacity:.55;position:relative;z-index:1}
+  .foto-slot.con-foto{border-style:solid}
+  .foto-slot.con-foto figcaption{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.65);opacity:1}
+  @media(max-width:700px){.fotos-grid{grid-template-columns:1fr}}
+
+  /* collage de fotos reales */
+  .collage{display:grid;grid-template-columns:1.15fr 1fr;gap:14px}
+  .collage figure{margin:0;border:1px solid var(--linea);border-radius:8px;overflow:hidden;position:relative;background:#fff}
+  .collage img{width:100%;height:100%;object-fit:cover;display:block}
+  .collage figcaption{position:absolute;left:10px;bottom:10px;background:rgba(43,38,32,.8);color:var(--papel);font-family:'Inconsolata',monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:4px}
+  .c-gato{grid-row:1/3;min-height:420px}
+  .c-med{min-height:200px}
+  .c-ancha{grid-column:1/-1;min-height:220px}
+  .c-ancha img{object-position:center 62%}
+  @media(max-width:700px){.collage{grid-template-columns:1fr}.c-gato{grid-row:auto;min-height:320px}}
+  /* franja de novedades */
+  .strip{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;-webkit-overflow-scrolling:touch}
+  .strip figure{flex:0 0 190px;margin:0;border:1px solid var(--linea);border-radius:8px;overflow:hidden;background:#fff;scroll-snap-align:start}
+  .strip img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+  .strip-nota{margin-top:10px;font-size:.85rem;color:rgba(43,38,32,.65);font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="lomos" aria-hidden="true">
+  <span style="background:#1F4E3D"></span><span style="background:#8E2F2B"></span><span style="background:#B98A2E"></span><span style="background:#2B2620"></span><span style="background:#1F4E3D"></span><span style="background:#B98A2E"></span><span style="background:#8E2F2B"></span><span style="background:#2B2620"></span><span style="background:#B98A2E"></span><span style="background:#1F4E3D"></span><span style="background:#8E2F2B"></span><span style="background:#2B2620"></span>
+</div>
+
+<nav aria-label="Principal">
+  <div class="nav-in">
+    <a class="brand" href="#top">Mar <em>de</em> Libros</a>
+    <div class="nav-links">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#visita">Visítanos</a>
+      <a class="btn" href="tel:+56322593810">Encargar un libro</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-top">
+    <p class="eyebrow">Librería · Calle Esmeralda, Valparaíso</p>
+    <h1 class="display">Un puerto donde<br>fondean <em>los libros</em></h1>
+    <p class="hero-sub">Libros nuevos y usados, clásicos de tapa dura a precios de librería de barrio, y encargos que llegan en pocos días. Atendida por su dueño, con gatos de librería incluidos.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#catalogo">Explorar el catálogo</a>
+      <a class="btn btn-linea" href="tel:+56322593810">Llamar al 32 259 3810</a>
+    </div>
+    <div class="colofon reveal">
+      <span><b>4.4</b> en Google</span>
+      <span><b>117</b> reseñas</span>
+      <span><b>Encargos</b> en 4 días</span>
+    </div>
+  </div>
+</header>
+
+<section id="catalogo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Catálogo</p>
+      <h2 class="display">Qué vas a encontrar</h2>
+    </div>
+    <div class="catalogo reveal">
+      <div class="cat-item">
+        <h3>Clásicos de tapa dura</h3>
+        <p>Ediciones firmes y bonitas de los imprescindibles, a precios que sorprenden hasta a quienes compran por internet.</p>
+      </div>
+      <div class="cat-item">
+        <h3>Libros usados con historia</h3>
+        <p>Estantes de segunda mano donde siempre aparece una joya: literatura, ensayo y hallazgos inesperados.</p>
+      </div>
+      <div class="cat-item">
+        <h3>Novedades y originales</h3>
+        <p>Una selección cuidada de títulos nuevos que se renueva con las llegadas de cada semana.</p>
+      </div>
+      <div class="cat-item">
+        <h3>Pedidos por encargo</h3>
+        <p>Si el libro que buscas no está en tienda, lo encargamos: suele llegar en unos cuatro días. Basta con dejarnos el dato.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="novedades" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Novedades</p>
+      <h2 class="display">Recién llegados al mesón</h2>
+    </div>
+    <div class="strip reveal" aria-label="Muestra de libros disponibles en tienda">
+      <figure><img src="novedad-1.jpg" alt="Muro de novelas de Stephen King exhibidas en la librería" loading="lazy"></figure>
+      <figure><img src="novedad-2.jpg" alt="Libro Valparaíso Histórico y Cotidiano sobre un mesón de feria" loading="lazy"></figure>
+      <figure><img src="novedad-3.jpg" alt="Ejemplares de Mujeres que corren con los lobos apilados en un estante" loading="lazy"></figure>
+      <figure><img src="novedad-4.jpg" alt="Libro El Monje y el Millonario exhibido entre otros títulos" loading="lazy"></figure>
+      <figure><img src="novedad-5.jpg" alt="Novela juvenil El Rey de la Máscara Oscura sobre pilas de libros" loading="lazy"></figure>
+      <figure><img src="novedad-6.jpg" alt="Volver a Yvetot de Annie Ernaux, Premio Nobel de Literatura 2022" loading="lazy"></figure>
+    </div>
+    <p class="strip-nota">Una muestra de lo que va llegando. El catálogo completo se descubre en tienda; y si un título no está, se encarga.</p>
+  </div>
+</section>
+
+<section class="gato">
+  <div class="wrap reveal">
+    <p class="eyebrow">La casa</p>
+    <h2 class="display">Los gatos eligen primero</h2>
+    <p>En Mar de Libros te recibe un gato en la puerta, dispuesto a acompañarte entre los estantes. Es parte del encanto de una librería de barrio de verdad: se conversa, se recomienda y se busca hasta encontrar.</p>
+  </div>
+</section>
+
+<section id="opiniones">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Opiniones</p>
+      <h2 class="display">Lo que dicen los lectores</h2>
+    </div>
+    <div class="rev-grid">
+      <article class="rev reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p>"Tiene muy buenos precios, incluso más baratos que comprar por internet. Si no tienen el libro, lo encargan y llega en unos cuatro días."</p>
+        <cite>Reseña de Google · adaptada</cite>
+      </article>
+      <article class="rev reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p>"El señor que atiende es muy amable y los gatos, cariñosísimos. Cien por ciento recomendada."</p>
+        <cite>Reseña de Google · adaptada</cite>
+      </article>
+      <article class="rev reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p>"Mezcla de libros originales y usados, con una selección de clásicos de tapa dura a muy buen precio."</p>
+        <cite>Reseña de Google · adaptada</cite>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<section id="galeria">
+  <div class="wrap">
+    <p class="eyebrow">El local</p>
+    <h2 class="display" style="margin:6px 0 30px;font-size:clamp(1.9rem,4.5vw,2.8rem)">Conócenos por dentro</h2>
+    <div class="collage reveal">
+      <figure class="c-gato"><img src="gato.jpg" alt="Uno de los gatos de la librería sentado en el pasillo central, entre estanterías de piso a techo, con el mesón de caja al fondo"><figcaption>El anfitrión oficial</figcaption></figure>
+      <figure class="c-med"><img src="fachada.jpg" alt="Fachada de Mar de Libros en calle Esmeralda, con letrero pintado a mano y vitrinas llenas de libros"><figcaption>Esmeralda 1124</figcaption></figure>
+      <figure class="c-med"><img src="pasillo.jpg" alt="Pasillo interior de la librería con estanterías repletas hasta el techo"><figcaption>Los pasillos</figcaption></figure>
+      <figure class="c-ancha"><img src="feria.jpg" alt="Stand de Mar de Libros en una feria del libro, con repisas y mesones llenos de títulos"><figcaption>También en ferias del libro</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="visita" style="padding-top:0">
+  <div class="wrap info-grid">
+    <div class="reveal">
+      <p class="eyebrow">Horario</p>
+      <h2 class="display" style="margin:6px 0 26px;font-size:clamp(1.9rem,4.5vw,2.8rem)">Cuándo venir</h2>
+      <ul class="horario" id="lista-horario">
+        <li data-dia="1"><span class="dia">Lunes</span><time>10:00 – 19:00</time></li>
+        <li data-dia="2"><span class="dia">Martes</span><time>10:00 – 19:00</time></li>
+        <li data-dia="3"><span class="dia">Miércoles</span><time>10:00 – 19:00</time></li>
+        <li data-dia="4"><span class="dia">Jueves</span><time>10:00 – 19:00</time></li>
+        <li data-dia="5"><span class="dia">Viernes</span><time>10:00 – 19:00</time></li>
+        <li data-dia="6"><span class="dia">Sábado</span><time>12:30 – 17:00</time></li>
+        <li data-dia="0"><span class="dia">Domingo</span><span class="cerrado">Cerrado</span></li>
+      </ul>
+    </div>
+    <div class="dir reveal">
+      <p class="eyebrow">Ubicación</p>
+      <h2 class="display" style="margin:6px 0 26px;font-size:clamp(1.9rem,4.5vw,2.8rem)">Dónde estamos</h2>
+      <p class="addr">Esmeralda 1124<br>Valparaíso</p>
+      <p>En plena calle Esmeralda, a pasos de la plaza Aníbal Pinto y del corazón histórico del puerto.</p>
+      <p><a href="https://www.google.com/maps/search/?api=1&query=Librer%C3%ADa+Mar+de+Libros+Esmeralda+1124+Valpara%C3%ADso" target="_blank" rel="noopener">Abrir en Google Maps</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <p class="eyebrow">Encargos</p>
+    <h2 class="display">¿Buscas un libro difícil?</h2>
+    <p>Llámanos con el título y el autor. Lo buscamos, lo encargamos y te avisamos cuando esté en el mesón.</p>
+    <a class="btn" href="tel:+56322593810">Llamar al 32 259 3810</a>
+  </div>
+</section>
+
+<div class="lomos" aria-hidden="true">
+  <span style="background:#8E2F2B"></span><span style="background:#2B2620"></span><span style="background:#1F4E3D"></span><span style="background:#B98A2E"></span><span style="background:#8E2F2B"></span><span style="background:#1F4E3D"></span><span style="background:#2B2620"></span><span style="background:#B98A2E"></span><span style="background:#1F4E3D"></span><span style="background:#8E2F2B"></span><span style="background:#B98A2E"></span><span style="background:#2B2620"></span>
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© <span id="anio"></span> Librería Mar de Libros · Valparaíso</span>
+    <a href="tel:+56322593810">+56 32 259 3810</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('anio').textContent = new Date().getFullYear();
+  const hoy = new Date().getDay();
+  document.querySelectorAll('#lista-horario li').forEach(li=>{
+    if(Number(li.dataset.dia) === hoy) li.classList.add('hoy');
+  });
+  const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
